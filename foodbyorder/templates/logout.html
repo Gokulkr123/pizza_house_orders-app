@@ -1,0 +1,46 @@
+{% extends "layout/app-layout.html" %}
+
+{% block content %}
+<style>
+  body {
+    background-color: azure;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  form {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<h1>Sure you want to logout, {{ user.username }}?</h1>
+{% if user.is_authenticated %}
+  <p>You are currently logged in as {{ user.username }}.</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Log Out</button>
+  </form>
+{% else %}
+  <p>You are not currently logged in.</p>
+{% endif %}
+{% endblock %}

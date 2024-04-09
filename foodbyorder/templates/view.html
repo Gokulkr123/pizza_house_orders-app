@@ -1,0 +1,77 @@
+{% extends 'layout/app-layout.html' %}
+
+{% block content %}
+<style>
+  body {
+    background-image: url('https://images.pexels.com/photos/2619970/pexels-photo-2619970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  } 
+  .form-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background */
+    padding: 20px;
+    margin-top: 50px;
+    border-radius: 10px;
+  }
+  /* Additional styling for the table */
+  .table {
+    background-color: #fff; /* Set table background color */
+  }
+  .table th,
+  .table td {
+    vertical-align: middle; /* Align content vertically in the middle */
+  }
+  .table th {
+    background-color: #f5f5f5; /* Set header background color */
+  }
+  .btn-action {
+    margin-right: 5px; /* Reduce margin between buttons */
+  }
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1"> <!-- Adjust column width for larger screens -->
+      <div class="form-container">
+        <div class="panel-heading">
+          <h2 class="text-center">Orders</h2>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive"> <!-- Add responsiveness to the table -->
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Customer Name</th>
+                  <th>Contact Number</th>
+                  <th>Ordered Pizza</th>
+                  <th>Size</th>
+                  <th>Quantity</th>
+                  <th>Drinks</th>
+                  <th>Updates</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for food in food_list %}
+                <tr>
+                  <td>{{ food.cname }}</td>
+                  <td>{{ food.cphonenumber }}</td>
+                  <td>{{ food.pname }}</td>
+                  <td>{{ food.psize }}</td>
+                  <td>{{ food.pnumber }}</td>
+                  <td>{{ food.pdrinks }}</td>
+                  <td>
+                    <a href="{% url 'updatefood' food.id %}" class="btn btn-primary btn-action"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'deletefood' food.id %}" class="btn btn-danger btn-action"><i class="fas fa-trash-alt"></i></a>
+                    <a href="{% url 'pizza_pdf' food.id %}" class="btn btn-primary btn-action"><i class="fas fa-file-download"></i></a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
